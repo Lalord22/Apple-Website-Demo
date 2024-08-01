@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useRef } from 'react'
 import { hightlightsSlides } from '../constants'
 import gsap from 'gsap';
+import { pauseImg, playImg, replayImg } from '../utils';
 
 const VideoCarousel = () => {
   const videoRef = useRef([]);
@@ -71,8 +72,21 @@ const VideoCarousel = () => {
     </div>
     <div className='relative flex-center mt-10'>
       <div className='flex-center py-5 px-7 bg-gray-300 backdrop-blur rounded-full'>
-
+        {videoRef.current.map((_,i) => (
+          <span key={i} ref={(el) => (videoDivRef.current[i] = el)}
+          className='mx-2 w-3 h-3 bg-gray-200 rounded-full cursor-pointer'
+          >
+            <span className='absolute h-full w-full rounded-full' ref={(el) => (videoSpanRef.current[i] = el)} />
+          </span>
+        ))}
       </div>
+      <button className='control-btn'>
+        <img src={isLastVideo ? replayImg : !isPlaying ? playImg : pauseImg} 
+        alt={isLastVideo ? 'replay' : !isPlaying ? 'play' : 'pause'} 
+        
+        />
+
+      </button>
     </div>
     </>
   )
