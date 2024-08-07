@@ -3,11 +3,10 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 
-//...
 import * as Sentry from "@sentry/react";
 
 Sentry.init({
-  dsn: "https://0f18e4c39cdcded85aafeedcbcb7c527@o4507737428918272.ingest.us.sentry.io/4507737432391680",
+  dsn: "https://cc3a5a8b6881a75e70d8fcb224e04b8d@o4507738080608256.ingest.us.sentry.io/4507738092601344",
   integrations: [
     Sentry.browserTracingIntegration(),
     Sentry.replayIntegration(),
@@ -22,9 +21,9 @@ Sentry.init({
 });
 
 
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
 )
+X
