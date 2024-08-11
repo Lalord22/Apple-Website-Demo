@@ -3,6 +3,7 @@ import { chipImg, frameImg, frameVideo } from '../utils'
 import { useGSAP } from '@gsap/react'
 import  gsap  from 'gsap';
 import { useRef } from 'react';
+import { animateWithGsap } from '../utils/animations';
 
 const HowItWorks = () => {
     const videoRef = React.useRef();
@@ -16,6 +17,13 @@ const HowItWorks = () => {
             opacity: 0,
             scale: 2,
             duration: 2,
+            ease: 'power2.inOut'
+        })
+
+        animateWithGsap('.g_fadeIn', {
+            y: 0, 
+            opacity: 1, 
+            duration: 1, 
             ease: 'power2.inOut'
         })
     },[]);
@@ -52,6 +60,32 @@ const HowItWorks = () => {
                     Honkai: Star Rail
                 </p>
             </div>
+                <div className='hiw-text-container'>
+                    <div className='flex flex-1 justify-center flex-col'>
+                        <p className='hiw-text g_fadeIn'>
+                            A17 is an entirely new class of iPhone Chip
+                            that delivers our  {''}
+                            <span className='text-white'>
+                                best graphics performance ever
+                            </span>,
+                            .
+                        </p>
+                    
+                    <p className='hiw-text g_fadeIn'>
+                        Mobile {' '} 
+                        <span className='text-white'>
+                            games will look and play better than ever
+                        </span>,
+                            , with incredibly detailed characters.
+                    </p>
+                </div>
+                <div className='flex-1 flex justify-center flex-col g_fadeIn'>
+                    <p className='hiw-text'>New</p>
+                    <p className='hiw-bigtext'>Pro-class</p>
+                    <p className='hiw-text'>With 6 cores</p>                  
+                </div>
+                </div>
+            
         </div>
     </section>
   )
