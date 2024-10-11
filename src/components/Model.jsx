@@ -10,6 +10,7 @@ import { View } from '@react-three/drei';
 import { models } from '../constants';
 import { sizes } from '../constants';
 import { animateWithGsapTimeline } from '../utils/animations';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 
 const Model = () => {
@@ -34,20 +35,43 @@ const Model = () => {
     const tl = gsap.timeline();
 
     useEffect(() => {
-        if(size === 'large'){
-            animateWithGsapTimeline(tl, small, smallRotation, '#view1', '#view2',{
-                transform: 'translateX(-100%)', 
+        const loader = new GLTFLoader();
+        const modelPath = size === 'large' ? '/models/largeScene.glb' : '/models/smallScene.glb'; // Adjust your model paths here
+
+        loader.load(
+            modelPath,
+            (gltf) => {
+                // Clear previous models
+                if (size === 'large') {
+                    large.current.clear();
+                    large.current.add(gltf.scene);
+                } else {
+                    small.current.clear();
+                    small.current.add(gltf.scene);
+                }
+            },
+            undefined,
+            (error) => {
+                console.error('Error loading model:', error);
+            }
+        );
+    }, [size]); // This useEffect is only for loading the models
+
+    useEffect(() => {
+        if (size === 'large') {
+            animateWithGsapTimeline(tl, small, smallRotation, '#view1', '#view2', {
+                transform: 'translateX(-100%)',
                 duration: 2
-            })
+            });
         }
 
-        if(size ==='small'){
-            animateWithGsapTimeline(tl,large, largeRotation, '#view2', '#view1',
-                {transform: 'translateX(0)', 
+        if (size === 'small') {
+            animateWithGsapTimeline(tl, large, largeRotation, '#view2', '#view1', {
+                transform: 'translateX(0)',
                 duration: 2
-                })
+            });
         }
-    },[size])
+    }, [size, smallRotation, largeRotation]);
 
     useGSAP(() => {
         gsap.to('#heading',{

@@ -9,6 +9,7 @@ import * as Sentry from '@sentry/react';
 import HowItWorks from "./components/HowItWorks";
 import Footer from "./components/Footer";
 
+
 const App = () => {
 
   return (
